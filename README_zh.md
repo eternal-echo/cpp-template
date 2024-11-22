@@ -76,7 +76,9 @@ target_link_libraries(main PRIVATE ${LIBRARY_NAME})  # 将可执行文件链接�
 示例命令：
 
 ```bash
+# WSL或ubuntu环境
 mkdir build && cd build
+cmake .. -DCMAKE_BUILD_TYPE=Debug
 cmake .. -DCMAKE_BUILD_TYPE=[Debug | Coverage | Release]
 make
 ./main

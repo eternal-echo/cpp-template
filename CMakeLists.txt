@@ -34,6 +34,9 @@ include(Warnings)
 # Check for LTO support.
 find_lto(CXX)
 
+# 添加 Boost 和生成的文件路径
+find_package(Boost REQUIRED COMPONENTS system log log_setup)
+
 # --------------------------------------------------------------------------------
 #                         Locate files (change as needed).
 # --------------------------------------------------------------------------------
@@ -56,6 +59,13 @@ target_include_directories(${LIBRARY_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/include)
 
 # There's also (probably) doctests within the library, so we need to see this as well.
 target_link_libraries(${LIBRARY_NAME} PUBLIC doctest)
+
+if (Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
+    target_link_libraries(${LIBRARY_NAME} PUBLIC ${Boost_LIBRARIES})
+else()
+    message(FATAL_ERROR "Boost library not found!")
+endif()
 
 # Set the compile options you want (change as needed).
 target_set_warnings(${LIBRARY_NAME} ENABLE ALL AS_ERROR ALL DISABLE Annoying)
