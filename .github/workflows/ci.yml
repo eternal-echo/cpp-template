@@ -37,6 +37,18 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v2
 
+    - name: Install Boost on Linux
+      if: matrix.os == 'ubuntu-latest'
+      run: sudo apt-get install -y libboost-all-dev
+
+    - name: Install Boost on macOS
+      if: matrix.os == 'macos-latest'
+      run: brew install boost
+
+    - name: Install Boost on Windows
+      if: matrix.os == 'windows-latest'
+      run: choco install boost-msvc-14.1
+
     - name: Configure (${{ matrix.configuration }})
       run: cmake -S . -Bbuild -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
 
