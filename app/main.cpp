@@ -33,7 +33,7 @@ static void run_server() {
     }
 }
 
-void run_client(const std::string& host) {
+static void run_client(const std::string& host) {
     try {
         BOOST_LOG_NAMED_SCOPE("run_client");
         boost::asio::io_context io_context;
