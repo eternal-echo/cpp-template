@@ -54,7 +54,7 @@ private:
 
 class tcp_server {
 public:
-    tcp_server(boost::asio::io_context& io_context, short port = 12345)
+    tcp_server(boost::asio::io_context& io_context, unsigned short port = 12345)
         : io_context_(io_context),
           acceptor_(io_context, tcp::endpoint(tcp::v4(), port)) {
         start_accept();

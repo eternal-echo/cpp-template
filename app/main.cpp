@@ -7,7 +7,7 @@
 #endif
 
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
 
 #include <boost/log/trivial.hpp>
 #include <boost/log/utility/setup/common_attributes.hpp>
@@ -22,7 +22,7 @@
 namespace logging = boost::log;
 namespace keywords = boost::log::keywords;
 
-void run_server() {
+static void run_server() {
     try {
         BOOST_LOG_NAMED_SCOPE("run_server");
         boost::asio::io_context io_context;
@@ -93,31 +93,6 @@ int main() {
   Dummy d = Dummy();
 
   // /* Asio example */
-  // boost::asio::io_context io_context;
-
-  // // 启动服务器
-  // std::thread server_thread([&io_context]() {
-  //     try {
-  //         AsioServer server(io_context, 8080);
-  //         io_context.run();
-  //     } catch (const std::exception& e) {
-  //         std::cerr << "Server exception: " << e.what() << std::endl;
-  //     }
-  // });
-
-  // // 等待服务器启动
-  // std::this_thread::sleep_for(std::chrono::seconds(1));
-
-  // // 启动客户端
-  // try {
-  //     AsioClient client(io_context, "127.0.0.1", "8080");
-  // } catch (const std::exception& e) {
-  //     std::cerr << "Client exception: " << e.what() << std::endl;
-  // }
-
-  // server_thread.join();
-
-
   std::thread server_thread(run_server);
 
   // Allow server to start
