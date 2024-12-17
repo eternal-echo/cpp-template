@@ -28,7 +28,7 @@ include(CTest)
 include(Doctest)
 include(Documentation)
 include(LTO)
-include(Misc)
+# include(Misc)
 include(Warnings)
 
 # Check for LTO support.
