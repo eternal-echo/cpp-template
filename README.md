@@ -35,6 +35,8 @@
 - 主程序存放在 [app/](app/) 文件夹
 - 测试代码存放在 [tests/](tests/) 文件夹（默认编译为 `unit_tests`）
 
+### 修改步骤
+
 如果需要添加新的可执行文件，例如 `app/hello.cpp`，只需在 [CMakeLists.txt](CMakeLists.txt) 文件中添加以下两行代码：
 
 ```cmake
@@ -48,6 +50,17 @@ target_link_libraries(main PRIVATE ${LIBRARY_NAME})  # 将可执行文件链接�
 
 ---
 
+### 环境搭建
+
+```bash
+docker build -t cpp .
+docker buildx build . -t jelin-dev/ubuntu22.04
+
+docker run -itd -p 2201:22 --name test jelin-dev/ubuntu22.04:latest
+
+docker run -it --rm -v /e/Projects/careers/os/PLCT/hw/ans/mixplus:/workspace -w /workspace stagex/abseil-cpp
+```
+
 ### 构建步骤
 
 通过创建构建目录（如 `build/`），运行 `cmake` 生成构建文件，然后使用 `make` 构建目标。
@@ -59,7 +72,14 @@ target_link_libraries(main PRIVATE ${LIBRARY_NAME})  # 将可执行文件链接�
 mkdir build && cd build
 cmake .. -DCMAKE_BUILD_TYPE=Debug
 cmake .. -DCMAKE_BUILD_TYPE=[Debug | Coverage | Release]
+
+# win
+cmake --build .
+# linux
 make
+# win
+./Debug/main.exe
+# linux
 ./main
 make test      # 编译并运行测试代码
 make coverage  # 生成代码覆盖率报告
