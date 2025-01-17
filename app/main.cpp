@@ -7,11 +7,8 @@
 #endif
 
 #include <iostream>
-#include <cstdlib>
 
 #include "example.h"
-
-#include <thread>
 
 /*
  * Simple main program that demontrates how access
